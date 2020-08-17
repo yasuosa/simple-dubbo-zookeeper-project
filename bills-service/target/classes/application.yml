@@ -1,0 +1,49 @@
+#数据源的配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/bills?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: 123456
+    #注入数据源的类型   默认的为HikariDataSource
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      max-active: 20
+      min-idle: 5
+      validation-query: select x
+      initial-size: 3
+      max-wait: 5000
+      stat-view-servlet:
+        #        login-username: root
+        #        login-password: 123456
+        allow:
+        deny:
+        url-pattern: /api/druid/*
+        enabled: true  #启用数据源监控
+#mybatisplus的配置
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mapper/*Mapper.xml
+  global-config:
+    db-config:
+      id-type: auto
+
+#dubbo:
+#  #声明注册到zk的名字 应该程序的名称
+#  application:
+#    name: bills-service-provider
+#  #声明注册中心的地址和方式
+#  registry:
+#    address: zookeeper://47.101.138.164:2181
+#  #使用dubbo协议，将服务暴露在20880端口
+#  protocol:
+#    name: dubbo
+#    port: 20880
+#  #提供者全局配置
+#  provider:
+#    timeout: 4000
+#    retries: 2
+#    loadbalance: random
+#  config-center:
+#    timeout: 10000
